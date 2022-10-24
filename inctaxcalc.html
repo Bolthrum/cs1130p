@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <h1>Income Tax Calculator</h1>
+    <title>Taxes</title>
+  </head>
+  <body>
+    <input type="number" id="income" placeholder="Income" />
+    <button id="button">Calculate tax</button>
+    <h3 id="incOut">Your income is:</h3>
+    <h3 id="taxOut">Tax you owe:</h3>
+
+      
+<script>
+
+    var button = document.getElementById("button");
+
+    button.onclick = function() {
+
+        var inc = document.getElementById("income");
+        var incOut = document.getElementById("incOut");
+        var taxOut = document.getElementById("taxOut");
+
+        var result = 0;
+
+        if(inc.value > 8,000,000) {
+            result = (inc.value - 8,000,000) * .35 + 2,410,000;
+        } 
+        else if(x > 2,000,000){
+        result = (inc.value - 2,000,000) * .32 + 490,000;    
+        }
+        else if(x > 800,000){
+        result = (inc.value - 800,000) * .30 + 130,000;    
+        }
+        else if(x > 400,000){
+        result = (inc.value - 400,000) * .25 + 30,000;    
+        }
+        else if(x > 250,000){
+        result = inc.value * .20;    
+        }
+        else{
+        result = inc.value * 0;    
+        }
+
+        incOut.innerHTML = ("Your income is: " + inc.value);  
+        taxOut.innerHTML = "Tax you owe: " + result;
+    }        
+</script>   
+</body>
+</html>
