@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        #rollList {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #rollList td,
+        #rollList th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #rollList tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #rollList tr:nth-child(odd) {
+            background-color: #bfddf1;
+        }
+
+
+        #rollList th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body onload="initcart()">
+
+    <h1>Payroll</h1>
+    <br>
+    <p>
+        <a href="index.html">Back to Home Page</a>
+    </p>
+    <br>
+
+    <p>
+        <label for="empname">Employee Name:</label>
+        <input name="empname" id="empname"></input>
+        <label for="dwork">Days Worked:</label>
+        <input id="dwork" name="dwork" type="number" oninput="computeamount()"></input>
+        <label for="drate">Daily Rate:</label>
+        <input id="drate" name="drate" type="number" oninput="computeamount()"></input>
+        <label for="damount">Deduction Amount:</label>
+        <input id="damount" name="damount" type="number" oninput="computeamount()"></input>
+        <label for="gross">Gross Pay:</label>
+        <input id="gross" name="gross" type="number" readonly></input>
+        <label for="net">Net Pay:</label>
+        <input id="net" name="net" type="number" readonly></input>
+        <button onclick="addtoroll()">Add to Roll</button>
+    </p>
+    <p>
+        <label for="empnum">No. of Employees:</label>
+        <input id="empnum" name="empnum" type="number" readonly></input>
+        <button onclick="clearroll()">Clear List</button>
+        <!--   <button onclick="showcart()">Show Cart</button> -->
+        <label for="delitem">Delete Employee:</label>
+        <input id="delitem" name="delitem" type="number"></input>
+        <button onclick="deleteitem()">Delete</button>
+    </p>
+
+    <p id="rollList"></p>
+    <script>
+        // Initialize rollList      
+        function initcart() {
+            rollList = [];
+            document.getElementById("empnum").value = rollList.length;
+            document.getElementById("rollList").innerHTML = "";
+
+
+        }
+
+        // Clear Cart
+        function clearroll() {
+            var toclear;
+
+            toclear = confirm("Do you want to clear list?");
+
+            if (toclear) {
+                initcart();
+            }
+
+        }
+
+        // Add item to rollList
+        function addtoroll() {
+
+            var rollitem = {
+                "item": "1",
+                "drate": 0,
+                "dwork": 1,
+                "itemamount": function itemamount() {
+                    return Math.round(this.drate * this.dwork * 100) / 100;
+                }
+            };
+
+            rollitem.item = document.getElementById("empname").value;
+            rollitem.dwork = document.getElementById("dwork").value;
+            rollitem.drate = document.getElementById("drate").value;
+
+            console.log(rollitem.item);
+            console.log(rollitem.dwork);
+            console.log(rollitem.drate);
+
+
+            rollList.push(rollitem);
+            //rollList[rollList.length]=rollitem;
+
+            console.log(rollList.length);
+            document.getElementById("empnum").value = rollList.length;
+
+            showcart();
+
+        }
+
+        // Compute Amount per Item
+        function computeamount() {
+            var q, p, d;
+            q = document.getElementById("dwork").value * 1;
+            p = document.getElementById("drate").value * 1;
+            d = document.getElementById("damount").value * 1;
+
+            a = Math.round(q * p); // rounds off to 2 decimal places
+            b = Math.round(a - d);
+
+            console.log(a);
+            console.log(b);
+
+            document.getElementById("gross").value = a;
+            document.getElementById("net").value = b;
+
+
+
+        }
+
+        // Delete item from chart
+        function deleteitem() {
+            var todelete;
+            var itemno;
+
+            itemno = document.getElementById("delitem").value;
+
+            todelete = confirm("Delete employee no. " + itemno + "?");
+
+            if (todelete) {
+
+                rollList.splice(itemno - 1, 1);
+                document.getElementById("empnum").value = rollList.length;
+                showcart();
+            }
+
+        }
+
+        // Show the contents of the rollList
+        function showcart() {
+
+            var i, l, carttext, totalamount, ln;
+            var theader, tbody, tb, tfooter;
+
+
+            // Generate table header;
+            theader = "<thead>";
+            theader += "<tr>";
+            theader += "<th>No.</th>";
+            theader += '<th style="text-align:left" >Item</th>';
+            theader += "<th>Days Worked</th>";
+            theader += '<th style="text-align:right">Daily Rate</th>';
+            theader += "<th>Gross Pay</th>";
+            theader += "<th>Deducted Amount</th>";
+            theader += "<th>Net Pay</th>";
+            theader += "</tr>";
+            theader += "</thead>";
+
+            // Generate Table Body
+            l = rollList.length;
+
+
+            //  for (i=0,totalamount=0,carttext="",tbody='<tbody id="rollList">';i<l;i++){
+            for (i = 0, totalamount = 0, carttext = "", tbody = ''; i < l; i++) {
+                ln = i + 1;
+                tbody += "<tr>" +
+                    '<td>' + ln + ' </td>' +
+                    '<td>' + rollList[i].item + ' </td>' +
+                    '<td style="text-align:right">' + rollList[i].dwork + '</td>' +
+                    '<td style="text-align:right">' + rollList[i].drate + '</td>' +
+                    '<td style="text-align:right">' + rollList[i].itemamount() + '</td>' +
+                    "</tr>";
+
+                totalamount += rollList[i].itemamount();
+
+
+            }
+
+            // tbody += "</tbody>";
+
+            // Generate table footer;
+            tfooter = "<tfoot>";
+            tfooter += "<tr>";
+            tfooter += '<th style="text-align:left">' + rollList.length + '</th>';
+            tfooter += '<th style="text-align:left">Items</th>';
+            tfooter += '<th></th>';
+            tfooter += '<th>Total Amount</th>';
+            tfooter += '<th style="text-align:right">' + totalamount + '</th>';
+            tfooter += "</tr>";
+            tfooter += "</tfoot>";
+
+            console.log(theader + tbody + tfooter);
+            document.getElementById("rollList").innerHTML =
+                '<table>' + theader + tbody + tfooter + '</table>';
+
+
+        }
+
+        // Global variable
+        var rollList = [];
+    </script>
+</body>
+
+</html>
