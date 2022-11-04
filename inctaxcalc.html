@@ -1,71 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="author" content="Andulrahman D. Khalil Ibrahim">
-  </head>
-  
 
-  <form name="incomeTaxForm" autocomplete="off">
+<head>
+    <meta name="author" content="Andulrahman D. Khalil Ibrahim">
+</head>
+
+
+<form name="incomeTaxForm" autocomplete="off">
     <input id="income" type="float" step="0.01" name="income" min="0" placeholder="Income">
     <a href="#modal" class="btn btnBig" onclick="calcIncomeTax()">Enter</a>
     <input type="reset" name="reset" class="btn btnBig">
-  </form>
+</form>
 
 
 <div class="modal" id="modal" aria-hidden="true">
-  <div class="modalDialog">
-    <div class="modalBody">
-      <p>You owe P<span id="total"></span> in Income Tax.</p>
+    <div class="modalDialog">
+        <div class="modalBody">
+            <p>You owe P<span id="total"></span> in Income Tax.</p>
+        </div>
     </div>
-  </div>
 </div>
 
 </div>
 
-<p> <a href="index.html">Back to Home Page</a> </p> 
+<p> <a href="index.html">Back to Home Page</a> </p>
 
 
 <script>
+    $(window).resize(function() {
+        var windowHeight = $(window).height();
 
-$(window).resize(function () {
-  var windowHeight = $( window ).height();
-  
-  var newHeaderHeight = windowHeight * 0.3;
-  $('#header').height(newHeaderHeight);
-  
-  var newContentHeight = windowHeight * 0.7;
-  var newContentHeightMargin = (windowHeight * 0.3);
-  $('#content').height(newContentHeight);
-});
+        var newHeaderHeight = windowHeight * 0.3;
+        $('#header').height(newHeaderHeight);
 
-
-function calcIncomeTax() {
-  var preFormattedIncome = document.getElementById("income").value;
-  var income = preFormattedIncome.replace(/[^\d.-]/g, '');
-  
-  if (income < 0) {
-    document.getElementById("total").innerHTML = (0.00).toFixed(2);
-  } else if (income >= 0 && income < 250000) {
-      var incomeTax = income * 0;
-      document.getElementById("total").innerHTML = incomeTax.toFixed(2);
-  } else if (income >= 250000 && income < 400000){
-      var incomeTax = 0 + ((income - 250,000) * 0.2);
-      document.getElementById("total").innerHTML = incomeTax.toFixed(2);
-  } else if (income >= 400000 && income < 800000) {
-      var incomeTax = 30000 + ((income - 400000) * 0.25);
-      document.getElementById("total").innerHTML = incomeTax.toFixed(2);
-  } else if (income >= 800000 && income < 2000000) {
-      var incomeTax = 130000 + ((income - 800000) * 0.3);
-      document.getElementById("total").innerHTML = incomeTax.toFixed(2);
-  } else if (income >= 2000000 && income < 8000000) {
-      var incomeTax = 490000 + ((income - 2000000) * 0.32);
-      document.getElementById("total").innerHTML = incomeTax.toFixed(2);
-  } else {
-      var incomeTax = 2410000 + ((income - 8000000) * 0.35);
-      document.getElementById("total").innerHTML = incomeTax.toFixed(2);
-  }
-}
+        var newContentHeight = windowHeight * 0.7;
+        var newContentHeightMargin = (windowHeight * 0.3);
+        $('#content').height(newContentHeight);
+    });
 
 
+    function calcIncomeTax() {
+        var preFormattedIncome = document.getElementById("income").value;
+        var income = preFormattedIncome.replace(/[^\d.-]/g, '');
+
+        if (income < 0) {
+            document.getElementById("total").innerHTML = (0.00).toFixed(2);
+        } else if (income >= 0 && income < 250000) {
+            var incomeTax = income * 0;
+            document.getElementById("total").innerHTML = incomeTax.toFixed(2);
+        } else if (income >= 250000 && income < 400000) {
+            var incomeTax = 0 + ((income - 250, 000) * 0.2);
+            document.getElementById("total").innerHTML = incomeTax.toFixed(2);
+        } else if (income >= 400000 && income < 800000) {
+            var incomeTax = 30000 + ((income - 400000) * 0.25);
+            document.getElementById("total").innerHTML = incomeTax.toFixed(2);
+        } else if (income >= 800000 && income < 2000000) {
+            var incomeTax = 130000 + ((income - 800000) * 0.3);
+            document.getElementById("total").innerHTML = incomeTax.toFixed(2);
+        } else if (income >= 2000000 && income < 8000000) {
+            var incomeTax = 490000 + ((income - 2000000) * 0.32);
+            document.getElementById("total").innerHTML = incomeTax.toFixed(2);
+        } else {
+            var incomeTax = 2410000 + ((income - 8000000) * 0.35);
+            document.getElementById("total").innerHTML = incomeTax.toFixed(2);
+        }
+    }
 </script>
+
 </html>
