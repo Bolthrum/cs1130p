@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>Feet and Meter Converter</h2>
+    <h2>Feet and Meter Converter</h2>
 
-<p>Insert a number into one of the input fields below:</p>
+    <p>Insert a number into one of the input fields below:</p>
 
-<p><input id="m" onkeyup="convert('M')"> Meters</p>
+    <p><input id="m" onkeyup="convert('M')"> Meters</p>
 
-<p><input id="ft" onkeyup="convert('FT')"> Feet</p> 
-  
-<p> <a href="index.html">Back to Home Page</a> </p> 
+    <p><input id="ft" onkeyup="convert('FT')"> Feet</p>
 
-<script>
-function convert(degree) {
-  var x;
-  if (degree == "M") {
-    x = document.getElementById("m").value * 3.281;
-    document.getElementById("ft").value = (Math.round(x*100)/100).toFixed(2);;
-  } 
-  	else {
-    x = document.getElementById("ft").value  / 3.281;
-    document.getElementById("m").value = (Math.round(x*100)/100).toFixed(2);;
-  }
-}
-</script>
+    <p> <a href="index.html">Back to Home Page</a> </p>
+
+    <script>
+        function convert(degree) {
+            var x;
+            if (degree == "M") {
+                x = document.getElementById("m").value * 3.281;
+                document.getElementById("ft").value = (Math.round(x * 100) / 100).toFixed(2);;
+            } else {
+                x = document.getElementById("ft").value / 3.281;
+                document.getElementById("m").value = (Math.round(x * 100) / 100).toFixed(2);;
+            }
+        }
+    </script>
 
 </body>
+
 </html>
