@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta name="author" content="Andulrahman D. Khalil Ibrahim">
-</head>
-
 
 <form name="incomeTaxForm" autocomplete="off">
     <input id="income" type="float" step="0.01" name="income" min="0" placeholder="Income">
@@ -49,7 +45,7 @@
             var incomeTax = income * 0;
             document.getElementById("total").innerHTML = incomeTax.toFixed(2);
         } else if (income >= 250000 && income < 400000) {
-            var incomeTax = 0 + ((income - 250, 000) * 0.2);
+            var incomeTax = 0 + ((income - 250000) * 0.2);
             document.getElementById("total").innerHTML = incomeTax.toFixed(2);
         } else if (income >= 400000 && income < 800000) {
             var incomeTax = 30000 + ((income - 400000) * 0.25);
