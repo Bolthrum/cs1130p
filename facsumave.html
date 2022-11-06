@@ -5,13 +5,14 @@
 
     <h2>Factorial, Sum, and Average</h2>
     <input type="text" id="num" />
-    <input type="button" value="Calculate" onclick="sum();factorial()" />
+    <input type="button" value="Calculate" onclick="sum();factorial();ave()" />
 
     <p> <a href="index.html">Back to Home Page</a> </p>
 
 
     <div id="fanswer"></div>
     <div id="sanswer"></div>
+    <div id="aanswer"></div>
 
     <script>
         function factorial() {
@@ -42,6 +43,22 @@
             while (i <= num);
 
             document.getElementById("sanswer").innerHTML = "The sum is " + su;
+        }
+
+
+        function ave() {
+            var nave, ave = 0,
+                sum = 0,
+                i;
+
+            nave = document.getElementById("num").value;
+
+            for (i = 0; i <= nave; i++) {
+                sum += i;
+            }
+
+            ave = sum / nave;
+            document.getElementById("aanswer").innerHTML = "The average is " + ave;
         }
     </script>
 
